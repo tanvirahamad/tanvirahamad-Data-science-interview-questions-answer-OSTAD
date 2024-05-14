@@ -16,6 +16,12 @@
 * [Q13: What are the differences between a model that minimizes squared error and the one that minimizes the absolute error? and in which cases each error metric would be more appropriate?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q13-what-are-the-differences-between-a-model-that-minimizes-squared-error-and-the-one-that-minimizes-the-absolute-error-and-in-which-cases-each-error-metric-would-be-more-appropriate)
 * [Q14: Define and compare parametric and non-parametric models and give two examples for each of them?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q14-define-and-compare-parametric-and-non-parametric-models-and-give-two-examples-for-each-of-them)
 * [Q15: Explain the kernel trick in SVM and why we use it and how to choose what kernel to use?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q15-explain-the-kernel-trick-in-svm-and-why-we-use-it-and-how-to-choose-what-kernel-to-use)
+* [Q16: Define the cross-validation process and the motivation behind using it?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q16-define-the-cross-validation-process-and-the-motivation-behind-using-it)
+* [Q17: You are building a binary classifier and you found that the data is imbalanced, what should you do to handle this situation?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q17-you-are-building-a-binary-classifier-and-you-found-that-the-data-is-imbalanced-what-should-you-do-to-handle-this-situation)
+* [Q18: You are working on a clustering problem, what are different evaluation metrics that can be used, and how to choose between them?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q18-you-are-working-on-a-clustering-problem-what-are-different-evaluation-metrics-that-can-be-used-and-how-to-choose-between-them)
+* [Q19: What is the ROC curve and when should you use it?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q19-what-is-the-roc-curve-and-when-should-you-use-it)
+* [Q20: What is the difference between hard and soft voting classifiers in the context of ensemble learners?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q20-what-is-the-difference-between-hard-and-soft-voting-classifiers-in-the-context-of-ensemble-learners)
+* [Q21: What is boosting in the context of ensemble learners discuss two famous boosting methods](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q21-what-is-boosting-in-the-context-of-ensemble-learners-discuss-two-famous-boosting-methods)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -174,4 +180,116 @@ Having domain knowledge can be very helpful in choosing the optimal kernel for y
 For linear problems, we can try linear or logistic kernels, and for nonlinear problems, we can use RBF or Gaussian kernels.
 
 ![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/Kerenl%20trick.png)
+
+### Q16: Define the cross-validation process and the motivation behind using it. ###
+Cross-validation is a technique used to assess the performance of a learning model in several subsamples of training data. In general, we split the data into train and test sets where we use the training data to train our model and the test data to evaluate the performance of the model on unseen data and validation set for choosing the best hyperparameters. Now, a random split in most cases(for large datasets) is fine. However, for smaller datasets, it is susceptible to loss of important information present in the data in which it was not trained. Hence, cross-validation though computationally expensive combats this issue.
+
+The process of cross-validation is as follows:
+
+1. Define k or the number of folds
+2. Randomly shuffle the data into K equally-sized blocks (folds)
+3. For each i in fold 1 to k train the data using all the folds except for fold i and test on the fold i.
+3. Average the K validation/test error from the previous step to get an estimate of the error.
+
+This process aims to accomplish the following:
+1- Prevent overfitting during training by avoiding training and testing on the same subset of the data points
+
+2- Avoid information loss by using a certain subset of the data for validation only. This is important for small datasets.
+
+Cross-validation is always good to be used for small datasets, and if used for large datasets the computational complexity will increase depending on the number of folds.
+
+![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/cross%20validation.png)
+
+### Q17: You are building a binary classifier and you found that the data is imbalanced, what should you do to handle this situation? ###
+Answer:
+If there is a data imbalance there are several measures we can take to train a fairer binary classifier:
+
+**1. Pre-Processing:**
+
+* Check whether you can get more data or not.
+
+* Use sampling techniques (Sample minority class, Downsample majority class, can take the hybrid approach as well). We can also use data augmentation to add more data points for the minority class but with little deviations/changes leading to new data points that are similar to the ones they are derived from. The most common/popular technique is SMOTE (Synthetic Minority Oversampling technique)
+
+* Suppression: Though not recommended, we can drop off some features directly responsible for the imbalance.
+
+* Learning Fair Representation: Projecting the training examples to a subspace or plane minimizes the data imbalance.
+
+* Re-Weighting: We can assign some weights to each training example to reduce the imbalance in the data.
+
+**2. In-Processing:**
+
+* Regularisation: We can add score terms that measure the data imbalance in the loss function and therefore minimizing the loss function will also minimize the degree of imbalance concerning the score chosen which also indirectly minimizes other metrics that measure the degree of data imbalance.
+
+* Adversarial Debiasing: Here we use the adversarial notion to train the model where the discriminator tries to detect if there are signs of data imbalance in the predicted data by the generator and hence the generator learns to generate data that is less prone to imbalance.
+
+**3. Post-Processing:**
+* Odds-Equalization: Here we try to equalize the odds for the classes with respect to the data is imbalanced for correct imbalance in the trained model. Usually, the F1 score is a good choice, if both precision and recall scores are important
+
+* Choose appropriate performance metrics. For example, accuracy is not a correct metric to use when classes are imbalanced. Instead, use precision, recall, F1 score, and ROC curve.
+
+![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/Oversampling.png)
+
+### Q18: You are working on a clustering problem, what are different evaluation metrics that can be used, and how to choose between them? ###
+
+Answer:
+
+Clusters are evaluated based on some similarity or dissimilarity measure such as the distance between cluster points. If the clustering algorithm separates dissimilar observations and similar observations together, then it has performed well. The two most popular metrics evaluation metrics for clustering algorithms are the 𝐒𝐢𝐥𝐡𝐨𝐮𝐞𝐭𝐭𝐞 𝐜𝐨𝐞𝐟𝐟𝐢𝐜𝐢𝐞𝐧𝐭 and 𝐃𝐮𝐧𝐧’𝐬 𝐈𝐧𝐝𝐞𝐱.
+
+𝐒𝐢𝐥𝐡𝐨𝐮𝐞𝐭𝐭𝐞 𝐜𝐨𝐞𝐟𝐟𝐢𝐜𝐢𝐞𝐧𝐭
+The Silhouette Coefficient is defined for each sample and is composed of two scores:
+a: The mean distance between a sample and all other points in the same cluster.
+b: The mean distance between a sample and all other points in the next nearest cluster.
+
+S = (b-a) / max(a,b)
+
+The 𝐒𝐢𝐥𝐡𝐨𝐮𝐞𝐭𝐭𝐞 𝐜𝐨𝐞𝐟𝐟𝐢𝐜𝐢𝐞𝐧𝐭 for a set of samples is given as the mean of the Silhouette Coefficient for each sample. The score is bounded between -1 for incorrect clustering and +1 for highly dense clustering. Scores around zero indicate overlapping clusters. The score is higher when clusters are dense and well separated, which relates to a standard concept of a cluster.
+
+Dunn’s Index
+
+Dunn’s Index (DI) is another metric for evaluating a clustering algorithm. Dunn’s Index is equal to the minimum inter-cluster distance divided by the maximum cluster size. Note that large inter-cluster distances (better separation) and smaller cluster sizes (more compact clusters) lead to a higher DI value. A higher DI implies better clustering. It assumes that better clustering means that clusters are compact and well-separated from other clusters.
+
+![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/Derivation-of-the-Overall-Silhouette-Coefficient-OverallSil.png)
+
+### Q19: What is the ROC curve and when should you use it? ### 
+
+Answer:
+
+ROC curve, Receiver Operating Characteristic curve, is a graphical representation of the model's performance where we plot the True Positive Rate (TPR) against the False Positive Rate (FPR) for different threshold values, for hard classification, between 0 to 1 based on model output.
+
+This ROC curve is mainly used to compare two or more models as shown in the figure below. Now, it is easy to see that a reasonable model will always give FPR less (since it's an error) than TPR so, the curve hugs the upper left corner of the square box 0 to 1 on the TPR axis and 0 to 1 on the FPR axis.
+
+The more the AUC(area under the curve) for a model's ROC curve, the better the model in terms of prediction accuracy in terms of TPR and FPR.
+
+Here are some benefits of using the ROC Curve :
+
+* Can help prioritize either true positives or true negatives depending on your case study (Helps you visually choose the best hyperparameters for your case)
+
+* Can be very insightful when we have unbalanced datasets
+
+* Can be used to compare different ML models by calculating the area under the ROC curve (AUC)
+
+![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/Roc_curve.svg.png)
+
+### Q20: What is the difference between hard and soft voting classifiers in the context of ensemble learners? ###
+
+Answer:
+
+* Hard Voting: We take into account the class predictions for each classifier and then classify an input based on the maximum votes to a particular class.
+
+* Soft Voting: We take into account the probability predictions for each class by each classifier and then classify an input to the class with maximum probability based on the average probability (averaged over the classifier's probabilities) for that class.
+
+![Alt_text](https://github.com/youssefHosni/Data-Science-Interview-Questions/blob/main/Figures/Hard%20Vs%20soft%20voting.png)
+
+### Q21: What is boosting in the context of ensemble learners discuss two famous boosting methods ###
+
+Answer:
+
+Boosting refers to any Ensemble method that can combine several weak learners into a strong learner. The general idea of most boosting methods is to train predictors sequentially, each trying to correct its predecessor.
+
+There are many boosting methods available, but by far the most popular are: 
+
+* Adaptive Boosting: One way for a new predictor to correct its predecessor is to pay a bit more attention to the training instances that the predecessor under-fitted. This results in new predictors focusing more and more on the hard cases.
+* Gradient Boosting:  Another very popular Boosting algorithm is Gradient Boosting. Just like AdaBoost, Gradient Boosting works by sequentially adding predictors to an ensemble, each one correcting its predecessor. However, instead of tweaking the instance weights at every iteration as AdaBoost does, this method tries to fit the new predictor to the residual errors made by the previous predictor.
+
+![1661788022018](https://user-images.githubusercontent.com/72076328/187241588-6cc3166f-a3e0-46b9-a0ce-e3d9ef9f0228.jpg)
 
