@@ -335,6 +335,176 @@ Answer:
 
 Regular PCA is the default, but it works only if the dataset fits in memory. Incremental PCA is useful for large datasets that don't fit in memory, but it is slower than regular PCA, so if the dataset fits in memory you should prefer regular PCA. Incremental PCA is also useful for online tasks when you need to apply PCA on the fly, every time a new instance arrives. Randomized PCA is useful when you want to considerably reduce dimensionality and the dataset fits in memory; in this case, it is much faster than regular PCA. Finally, Kernel PCA is useful for nonlinear datasets.
 
+### Q25: Discuss two clustering algorithms that can scale to large datasets ###
+
+Answer:
+
+**Minibatch Kmeans:**  Instead of using the full dataset at each iteration, the algorithm
+is capable of using mini-batches, moving the centroids just slightly at each iteration.
+This speeds up the algorithm typically by a factor of 3 or 4 and makes it
+possible to cluster huge datasets that do not fit in memory. Scikit-Learn implements
+this algorithm in the MiniBatchKMeans class.
+
+**Balanced Iterative Reducing and Clustering using Hierarchies (BIRCH)** 
+is a clustering algorithm that can cluster large datasets by first generating a small and compact summary of the large dataset that retains as much information as possible. This smaller summary is then clustered instead of clustering the larger dataset.
+
+### Q26: Do you need to scale your data if you will be using the SVM classifier and discus your answer ###
+Answer:
+Yes, feature scaling is required for SVM and all margin-based classifiers since the optimal hyperplane (the decision boundary) is dependent on the scale of the input features. In other words, the distance between two observations will differ for scaled and non-scaled cases, leading to different models being generated. 
+
+This can be seen in the figure below, when the features have different scales, we can see that the decision boundary and the support vectors are only classifying the X1 features without taking into consideration the X0 feature, however after scaling the data to the same scale the decision boundaries and support vectors are looking much better and the model is taking into account both features.
+
+To scale the data, normalization and standardization are the most popular approaches.
+![SVM scaled Vs non scaled](https://user-images.githubusercontent.com/72076328/192571498-4a939472-7bb1-4bf2-963f-a6e6394802ba.png)
+
+### Q27: What are Loss Functions and Cost Functions? Explain the key Difference Between them. ###
+
+Answer:
+The loss function is the measure of performance of the model on a single training example, whereas the cost function is the average loss function over all training examples or across the batch in the case of mini-batch gradient descent.
+
+Some examples of loss functions are Mean Squared Error, Binary Cross Entropy, etc.
+
+Whereas, the cost function is the average of the above loss functions over training examples.
+
+### Q28: What is the importance of batch in machine learning and explain some batch depend gradient descent algorithm? ###
+
+Answer:
+In the memory, the dataset can load either completely at once or in a form of a set. If we have a huge size of the dataset, then loading the whole data into memory will reduce the training speed, hence batch term introduce.
+
+Example: image data contains 1,00,000 images, we can load this into 3125 batches where 1 batch = 32 images. So instead of loading the whole 1,00,000 images in memory, we can load 32 images 3125 times which requires less memory.
+
+In summary, a batch is important in two ways: (1) Efficient memory consumption. (2) Improve training speed.
+
+There are 3 types of gradient descent algorithms based on batch size: (1) Stochastic gradient descent (2) Batch gradient descent (3) Mini Batch gradient descent
+
+If the whole data is in a single batch, it is called batch gradient descent. If the single data points are equal to one batch i.e. number of batches = number of data instances, it is called stochastic gradient descent. If the number of batches is less than the number of data points or greater than 1, it is known as mini-batch gradient descent.
+
+### Q29: What are the different methods to split a tree in a decision tree algorithm? ###
+
+Answer:
+
+Decision trees can be of two types regression and classification.
+For classification, classification accuracy created a lot of instability. So the following loss functions are used:
+- Gini's Index
+Gini impurity is used to predict the likelihood of a randomly chosen example being incorrectly classified by a particular node. It’s referred to as an “impurity” measure because it demonstrates how the model departs from a simple division.
+
+- Cross-Entropy or Information Gain
+Information gain refers to the process of identifying the most important features/attributes that convey the most information about a class. The entropy principle is followed with the goal of reducing entropy from the root node to the leaf nodes. Information gain is the difference in entropy before and after splitting, which describes the impurity of in-class items.
 
 
+For regression, the good old mean squared error serves as a good loss function which is minimized by splits of the input features and predicting the mean value of the target feature on the subspaces resulting from the split. But finding the split that results in the minimum possible residual sum of squares is computationally infeasible, so a greedy top-down approach is taken i.e. the splits are made at a level from top to down which results in maximum reduction of RSS. We continue this until some max depth or number of leaves is attained.
 
+### Q30: Why boosting is a more stable algorithm as compared to other ensemble algorithms? ###
+
+Answer:
+
+Since Boosting algorithms focus on errors found in previous iterations until they become obsolete. Whereas in bagging there is no corrective loop. That’s why boosting is a more stable algorithm compared to other ensemble algorithms.
+
+### Q31: What is active learning and discuss one strategy of it? ###
+
+Answer:
+Active learning is a special case of machine learning in which a learning algorithm can interactively query a user (or some other information source) to label new data points with the desired outputs. In statistics literature, it is sometimes referred to as optimal experimental design.
+
+1. Stream-based sampling 
+In stream-based selective sampling, unlabelled data is continuously fed to an active learning system, where the learner decides whether to send the same to a human oracle or not based on a predefined learning strategy. This method is apt in scenarios where the model is in production and the data sources/distributions vary over time. 
+
+2. Pool-based sampling
+In this case, the data samples are chosen from a pool of unlabelled data based on the informative value scores and sent for manual labeling. Unlike stream-based sampling, oftentimes, the entire unlabelled dataset is scrutinized for the selection of the best instances.
+
+![1669836673164](https://user-images.githubusercontent.com/72076328/204896144-43b2181a-d9ce-471b-95d0-44c0f7bb3025.jpg)
+
+### Q32: What are the different approaches to implementing recommendation systems? ###
+Answer:
+1. 𝐂𝐨𝐧𝐭𝐞𝐧𝐭-𝐁𝐚𝐬𝐞𝐝 𝐅𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠: Content-Based Filtering depends on similarities of items and users' past activities on the website to recommend any product or service.
+
+This filter helps in avoiding a cold start for any new products as it doesn't rely on other users' feedback, it can recommend products based on similarity factors. However, content-based filtering needs a lot of domain knowledge so that the recommendations made are 100 percent accurate.
+
+2. 𝐂𝐨𝐥𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐢𝐯𝐞-𝐁𝐚𝐬𝐞𝐝 𝐅𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠: The primary job of a collaborative filtering system is to overcome the shortcomings of content-based filtering.
+
+So, instead of focusing on just one user, the collaborative filtering system focuses on all the users and clusters them according to their interests.
+
+Basically, it recommends a product 'x' to user 'a' based on the interest of user 'b'; users 'a' and 'b' must have had similar interests in the past, which is why they are clustered together.
+
+The domain knowledge that is required for collaborative filtering is less, recommendations made are more accurate and it can adapt to the changing tastes of users over time. However, collaborative filtering faces the problem of a cold start as it heavily relies on feedback or activity from other users.
+
+3. 𝐇𝐲𝐛𝐫𝐢𝐝 𝐟𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠:  A mixture of content and collaborative methods. Uses descriptors and interactions.
+
+More modern approaches typically fall into the hybrid filtering category and tend to work in two stages:
+
+1). A candidate generation phase where we coarsely generate candidates from a corpus of hundreds of thousands, millions, or billions of items down to a few hundred or thousand
+
+2) A ranking phase where we re-rank the candidates into a final top-n set to be shown to the user. Some systems employ multiple candidate generation methods and rankers.
+
+### Q33: What are the evaluation metrics that can be used for multi-label classification? ###
+
+Answer:
+
+Multi-label classification is a type of classification problem where each instance can be assigned to multiple classes or labels simultaneously.
+
+The evaluation metrics for multi-label classification are designed to measure the performance of a multi-label classifier in predicting the correct set of labels for each instance.
+Some commonly used evaluation metrics for multi-label classification are:
+
+1. Hamming Loss: Hamming Loss is the fraction of labels that are incorrectly predicted. It is defined as the average number of labels that are predicted incorrectly per instance.
+
+2. Accuracy: Accuracy is the fraction of instances that are correctly predicted. In multi-label classification, accuracy is calculated as the percentage of instances for which all labels are predicted correctly.
+
+3. Precision, Recall, F1-Score: These metrics can be applied to each label separately, treating the classification of each label as a separate binary classification problem. Precision measures the proportion of predicted positive labels that are correct, recall measures the proportion of actual positive labels that are correctly predicted, and F1-score is the harmonic mean of precision and recall.
+
+4. Macro-F1, Micro-F1: Macro-F1 and Micro-F1 are two types of F1-score metrics that take into account the label imbalance in the dataset. Macro-F1 calculates the F1-score for each label and then averages them, while Micro-F1 calculates the overall F1-score by aggregating the true positive, false positive, and false negative counts across all labels.
+
+There are other metrics that can be used such as:
+* Precision at k (P@k)
+* Average precision at k (AP@k)
+* Mean average precision at k (MAP@k)
+
+### Q34: What is the difference between concept and data drift and how to overcome each of them? ###
+
+Answer:
+
+Concept drift and data drift are two different types of problems that can occur in machine learning systems.
+
+Concept drift refers to changes in the underlying relationships between the input data and the target variable over time. This means that the distribution of the data that the model was trained on no longer matches the distribution of the data it is being tested on. For example, a spam filter model that was trained on emails from several years ago may not be as effective at identifying spam emails from today because the language and tactics used in spam emails may have changed.
+
+Data drift, on the other hand, refers to changes in the input data itself over time. This means that the values of the input feature that the model was trained on no longer match the values of the input features in the data it is being tested on. For example, a model that was trained on data from a particular geographical region may not be as effective at predicting outcomes for data from a different region.
+
+To overcome concept drift, one approach is to use online learning methods that allow the model to adapt to new data as it arrives. This involves continually training the model on the most recent data while using historical data to maintain context. Another approach is to periodically retrain the model using a representative sample of the most recent data.
+
+To overcome data drift, one approach is to monitor the input data for changes and retrain the model when significant changes are detected. This may involve setting up a monitoring system that alerts the user when the data distribution changes beyond a certain threshold.
+
+Another approach is to preprocess the input data to remove or mitigate the effects of the features changing over time so that the model can continue learning from the remaining features.
+![ezgif com-webp-to-jpg (7)](https://user-images.githubusercontent.com/72076328/221916192-7a9fcf21-8e5f-4ddc-bd90-ef1bdabf1d3f.jpg)
+
+### Q35: Can you explain the ARIMA model and its components? ###
+Answer:
+The ARIMA model, which stands for Autoregressive Integrated Moving Average, is a widely used time series forecasting model. It combines three key components: Autoregression (AR), Differencing (I), and Moving Average (MA).
+
+* Autoregression (AR):
+The autoregressive component captures the relationship between an observation in a time series and a certain number of lagged observations. It assumes that the value at a given time depends linearly on its own previous values. The "p" parameter in ARIMA(p, d, q) represents the order of autoregressive terms. For example, ARIMA(1, 0, 0) refers to a model with one autoregressive term.
+
+* Differencing (I):
+Differencing is used to make a time series stationary by removing trends or seasonality. It calculates the difference between consecutive observations to eliminate any non-stationary behavior. The "d" parameter in ARIMA(p, d, q) represents the order of differencing. For instance, ARIMA(0, 1, 0) indicates that differencing is applied once.
+
+* Moving Average (MA):
+The moving average component takes into account the dependency between an observation and a residual error from a moving average model applied to lagged observations. It assumes that the value at a given time depends linearly on the error terms from previous time steps. The "q" parameter in ARIMA(p, d, q) represents the order of the moving average terms. For example, ARIMA(0, 0, 1) signifies a model with one moving average term.
+
+By combining these three components, the ARIMA model can capture both autoregressive patterns, temporal dependencies, and stationary behavior in a time series. The parameters p, d, and q are typically determined through techniques like the Akaike Information Criterion (AIC) or Bayesian Information Criterion (BIC).
+
+It's worth noting that there are variations of the ARIMA model, such as SARIMA (Seasonal ARIMA), which incorporates additional seasonal components for modeling seasonal patterns in the data.
+
+ARIMA models are widely used in forecasting applications, but they do make certain assumptions about the underlying data, such as linearity and stationarity. It's important to validate these assumptions and adjust the model accordingly if they are not met.
+![1-1](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/assets/72076328/12707951-bdf5-4cd1-9efd-c60c465007a3)
+
+### Q36: What are the assumptions made by the ARIMA model? ###
+Answer:
+
+The ARIMA model makes several assumptions about the underlying time series data. These assumptions are important to ensure the validity and accuracy of the model's results. Here are the key assumptions:
+
+Stationarity: The ARIMA model assumes that the time series is stationary. Stationarity means that the statistical properties of the data, such as the mean and variance, remain constant over time. This assumption is crucial for the autoregressive and moving average components to hold. If the time series is non-stationary, differencing (the "I" component) is applied to transform it into a stationary series.
+
+Linearity: The ARIMA model assumes that the relationship between the observations and the lagged values is linear. It assumes that the future values of the time series can be modeled as a linear combination of past values and error terms.
+
+No Autocorrelation in Residuals: The ARIMA model assumes that the residuals (the differences between the predicted values and the actual values) do not exhibit any autocorrelation. In other words, the errors are not correlated with each other.
+
+Normally Distributed Residuals: The ARIMA model assumes that the residuals follow a normal distribution with a mean of zero. This assumption is necessary for statistical inference, parameter estimation, and hypothesis testing.
+
+It's important to note that while these assumptions are commonly made in ARIMA modeling, they may not always hold in real-world scenarios. It's essential to assess the data and, if needed, apply transformations or consider alternative models that relax some of these assumptions. Additionally, diagnostics tools, such as residual analysis and statistical tests, can help evaluate the adequacy of the assumptions and the model's fit to the data.
