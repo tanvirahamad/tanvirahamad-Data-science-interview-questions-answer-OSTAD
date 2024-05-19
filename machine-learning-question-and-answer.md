@@ -22,6 +22,21 @@
 * [Q19: What is the ROC curve and when should you use it?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q19-what-is-the-roc-curve-and-when-should-you-use-it)
 * [Q20: What is the difference between hard and soft voting classifiers in the context of ensemble learners?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q20-what-is-the-difference-between-hard-and-soft-voting-classifiers-in-the-context-of-ensemble-learners)
 * [Q21: What is boosting in the context of ensemble learners discuss two famous boosting methods](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q21-what-is-boosting-in-the-context-of-ensemble-learners-discuss-two-famous-boosting-methods)
+* [Q22: How can you evaluate the performance of a dimensionality reduction algorithm on your dataset?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q22-how-can-you-evaluate-the-performance-of-a-dimensionality-reduction-algorithm-on-your-dataset)
+* [Q23: Define the curse of dimensionality and how to solve it. ](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q23-define-the-curse-of-dimensionality-and-how-to-solve-it)
+* [Q24: In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA, or Kernel PCA?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q24-in-what-cases-would-you-use-vanilla-pca-incremental-pca-randomized-pca-or-kernel-pca)
+* [Q25: Discuss two clustering algorithms that can scale to large datasets](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q25-discuss-two-clustering-algorithms-that-can-scale-to-large-datasets)
+* [Q26: Do you need to scale your data if you will be using the SVM classifier and discus your answer](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q26-do-you-need-to-scale-your-data-if-you-will-be-using-the-svm-classifier-and-discus-your-answer)
+* [Q27: What are Loss Functions and Cost Functions? Explain the key Difference Between them.](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q27-what-are-loss-functions-and-cost-functions-explain-the-key-difference-between-them)
+* [Q28: What is the importance of batch in machine learning and explain some batch depend gradient descent algorithm?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q28-what-is-the-importance-of-batch-in-machine-learning-and-explain-some-batch-depend-gradient-descent-algorithm)
+* [Q29: What are the different methods to split a tree in a decision tree algorithm?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q29-what-are-the-different-methods-to-split-a-tree-in-a-decision-tree-algorithm)
+* [Q30: Why boosting is a more stable algorithm as compared to other ensemble algorithms? ](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q30-why-boosting-is-a-more-stable-algorithm-as-compared-to-other-ensemble-algorithms)
+* [Q31: What is active learning and discuss one strategy of it?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20%26%20Answers%20for%20Data%20Scientists.md#q31-what-is-active-learning-and-discuss-one-strategy-of-it)
+* [Q32: What are the different approaches to implementing recommendation systems?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20&%20Answers%20for%20Data%20Scientists.md#:~:text=the%20best%20instances.-,Q32%3A%20What%20are%20the%20different%20approaches%20to%20implementing%20recommendation%20systems%3F,-Answer%3A)
+* [Q33: What are the evaluation metrics that can be used for multi-label classification?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20&%20Answers%20for%20Data%20Scientists.md#:~:text=Q33%3A%20What%20are%20the%20evaluation%20metrics%20that%20can%20be%20used%20for%20multi%2Dlabel%20classification%3F)
+* [Q34: What is the difference between concept and data drift and how to overcome each of them?](https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/blob/main/Machine%20Learning%20Interview%20Questions%20&%20Answers%20for%20Data%20Scientists.md#:~:text=at%20k%20(MAP%40k)-,Q34%3A%20What%20is%20the%20difference%20between%20concept%20and%20data%20drift%20and%20how%20to%20overcome%20each%20of%20them%3F,-Answer%3A)
+* [Q35: Can you explain the ARIMA model and its components?]()
+* [Q36: What are the assumptions made by the ARIMA model?]()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -291,5 +306,35 @@ There are many boosting methods available, but by far the most popular are:
 * Adaptive Boosting: One way for a new predictor to correct its predecessor is to pay a bit more attention to the training instances that the predecessor under-fitted. This results in new predictors focusing more and more on the hard cases.
 * Gradient Boosting:  Another very popular Boosting algorithm is Gradient Boosting. Just like AdaBoost, Gradient Boosting works by sequentially adding predictors to an ensemble, each one correcting its predecessor. However, instead of tweaking the instance weights at every iteration as AdaBoost does, this method tries to fit the new predictor to the residual errors made by the previous predictor.
 
-![1661788022018](https://user-images.githubusercontent.com/72076328/187241588-6cc3166f-a3e0-46b9-a0ce-e3d9ef9f0228.jpg)
+### Q22: How can you evaluate the performance of a dimensionality reduction algorithm on your dataset? ###
+
+Answer:
+
+Intuitively, a dimensionality reduction algorithm performs well if it eliminates a lot of dimensions from the dataset without losing too much information. One way to measure this is to apply the reverse transformation and measure the reconstruction error. However, not all dimensionality reduction algorithms provide a reverse transformation.
+
+Alternatively, if you are using dimensionality reduction as a preprocessing step before another Machine Learning algorithm (e.g., a Random Forest classifier), then you can simply measure the performance of that second algorithm; if dimensionality reduction did not lose too much information, then the algorithm should perform just as well as when using the original dataset.
+
+### Q23: Define the curse of dimensionality and how to solve it. ###
+
+Answer:
+Curse of dimensionality represents the situation when the amount of data is too few to be represented in a high-dimensional space, as it will be highly scattered in that high-dimensional space and it becomes more probable that we overfit this data. If we increase the number of features, we are implicitly increasing model complexity and if we increase model complexity we need more data. 
+
+Possible solutions are:
+Remove irrelevant features not discriminating classes correlated or features not resulting in much improvement, we can use:
+
+* Feature selection(select the most important ones).
+* Feature extraction(transform current feature dimensionality into a lower dimension preserving the most possible amount of information like PCA ).
+
+![Curse of dim'](https://user-images.githubusercontent.com/72076328/188653089-8999ea59-9511-4d52-baff-15a652e117a9.png)
+
+
+### Q24: In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA, or Kernel PCA? ### 
+
+
+Answer:
+
+Regular PCA is the default, but it works only if the dataset fits in memory. Incremental PCA is useful for large datasets that don't fit in memory, but it is slower than regular PCA, so if the dataset fits in memory you should prefer regular PCA. Incremental PCA is also useful for online tasks when you need to apply PCA on the fly, every time a new instance arrives. Randomized PCA is useful when you want to considerably reduce dimensionality and the dataset fits in memory; in this case, it is much faster than regular PCA. Finally, Kernel PCA is useful for nonlinear datasets.
+
+
+
 
